@@ -3,25 +3,30 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
-import { FormsModule } from "@angular/forms";
-import { ConvertToSpacesPipe } from "./shared/convert-to-spaces.pipe";
-import { StarComponent } from './shared/star/star.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from "@angular/common/http";
+import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { WelcomeComponent } from './welcome.component';
+import {RouterModule} from "@angular/router";
+import {ProductDetailGuard} from "./products/product-details/product-detail.guard";
+import { ProductModule } from './products/product.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent,
-    ConvertToSpacesPipe,
-    StarComponent
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: 'welcome', component: WelcomeComponent },
+      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
+    ]),
+    ProductModule
   ],
   providers: [],
   bootstrap: [AppComponent]
